@@ -2,6 +2,10 @@
 Serverless Computing for Big Data Time-Series Forecasting
 
 ## Lambda Functions
+
+parent.py
+ * Invokes one child function for each stock in order to fully parallelize our data analysis process.
+
 processing.py
   * Cleans and processes our raw data into a form that can be fed into a random forest regression model.
   * event: {"bucket": bucket_name, "file": file_name}
