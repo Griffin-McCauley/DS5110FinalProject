@@ -124,7 +124,6 @@ def lambda_handler(event, context):
             preruntimes.append(runtime)
         print(f'Sum of processing runtimes: {sum(preruntimes)}')
         print(f'Max of processing runtimes: {max(preruntimes)}')
-        print(c)
         
         print('posts3 processing runtimes')
         postruntimes = []
