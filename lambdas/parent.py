@@ -215,6 +215,7 @@ def lambda_handler(event,context):
                       'ULTRACEMCO',
                       'HINDPETRO']
                       
+        bucket_name = event["bucket"]
         type = event["type"]
         
         if (type == "processing"):
@@ -223,7 +224,7 @@ def lambda_handler(event,context):
                 # Define the input parameters that will be passed
                 # on to the child function
                 inputParams = {
-                    "bucket"   : "ds5110s3",
+                    "bucket"   : bucket_name,
                     "file"      : file
                 }
                 
@@ -239,7 +240,7 @@ def lambda_handler(event,context):
                 # Define the input parameters that will be passed
                 # on to the child function
                 inputParams = {
-                    "bucket"   : "ds5110s3",
+                    "bucket"   : bucket_name,
                     "stock"      : stock
                 }
                 
@@ -255,7 +256,7 @@ def lambda_handler(event,context):
                 # Define the input parameters that will be passed
                 # on to the child function
                 inputParams = {
-                    "bucket"   : "ds5110s3",
+                    "bucket"   : bucket_name,
                     "stock"      : stock
                 }
                 
