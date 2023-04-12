@@ -5,6 +5,7 @@ Serverless Computing for Big Data Time-Series Forecasting
 
 parent.py
  * Invokes one child function for each stock in order to fully parallelize our data analysis process.
+ * event: {"bucket": bucket_name, "type": child_type}
 
 processing.py
   * Cleans and processes our raw data into a form that can be fed into a random forest regression model.
