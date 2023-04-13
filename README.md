@@ -22,3 +22,12 @@ predict.py
 metrics.py
   * Analyzes the runtimes for each process in our pipeline and calculates the average MSE for our models across all stocks.
   * event: {}
+
+## S3 Bucket Structure
+
+ * models
+ *  models
+ *  mses
+ *  runtimes
+ * processed
+ * raw
