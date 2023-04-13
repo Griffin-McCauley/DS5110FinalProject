@@ -26,8 +26,8 @@ metrics.py
 ## S3 Bucket Structure
 
  * models
-  * models
-  * mses
-  * runtimes
+   * models
+   * mses
+   * runtimes
  * processed
  * raw
