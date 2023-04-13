@@ -25,9 +25,21 @@ metrics.py
 
 ## S3 Bucket Structure
 
- * models
-   * models
-   * mses
-   * runtimes
+ * models/
+   * models/
+     * {stock}.sav for each stock
+   * mses/
+     * {stock}.txt for each stock
+   * runtimes/
+     * {stock}.txt for each stock
  * processed
- * raw
+   * runtimes/
+     * {stock}.txt for each stock
+   * testing/
+     * {stock}.csv for each stock
+   * training/
+     * {stock}.csv for each stock
+   * validation/
+     * {stock}.csv for each stock
+ * raw/
+   * {stock}_minute_data_with_indicators.csv for each stock
