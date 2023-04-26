@@ -395,17 +395,27 @@ def lambda_handler(event, context):
     df = pd.DataFrame(fullparalleltimingmetrics)
     df.columns = ['Invocation','Computation','I/O']
     df.index = ['processing','parampreds','predmses','minmse','trainfull','testfull','total']
-    file_name = 'fullparalleltimingmetrics.csv'
+    file_name = 'timingmetrics/fullparalleltimingmetrics.csv'
     s3_resource.Object('ds5110s3', file_name).put(Body=df.to_csv())
     
     df = pd.DataFrame(actualtimingmetrics)
     df.columns = ['Invocation','Computation','I/O']
     df.index = ['processing','parampreds','predmses','minmse','trainfull','testfull','total']
-    file_name = 'actualtimingmetrics.csv'
+    file_name = 'timingmetrics/actualtimingmetrics.csv'
     s3_resource.Object('ds5110s3', file_name).put(Body=df.to_csv())
     
     df = pd.DataFrame(sequentialtimingmetrics)
     df.columns = ['Invocation','Computation','I/O']
     df.index = ['processing','parampreds','predmses','minmse','trainfull','testfull','total']
-    file_name = 'sequentialtimingmetrics.csv'
+    file_name = 'timingmetrics/sequentialtimingmetrics.csv'
     s3_resource.Object('ds5110s3', file_name).put(Body=df.to_csv())
+    
+    df = pd.DataFrame([processing_times,parampreds_times,predmses_times,minmse_times,trainfull_times,testfull_times])
+    df.index = ['processing','parampreds','predmses','minmse','trainfull','testfull']
+    file_name = 'timingmetrics/instancecomputetimingmetrics.csv'
+    s3_resource.Object('ds5110s3', file_name).put(Body=df.to_csv(header=False))
+    
+    df = pd.DataFrame([processing_iotimes,parampreds_iotimes,predmses_iotimes,minmse_iotimes,trainfull_iotimes,testfull_iotimes])
+    df.index = ['processing','parampreds','predmses','minmse','trainfull','testfull']
+    file_name = 'timingmetrics/instanceiotimingmetrics.csv'
+    s3_resource.Object('ds5110s3', file_name).put(Body=df.to_csv(header=False))
