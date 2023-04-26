@@ -3,6 +3,8 @@ Serverless Computing for Big Data Time-Series Forecasting
 
 ## Lambda Functions
 
+### Checkpoint 2
+
 parent.py
  * Invokes one child function for each stock in order to fully parallelize our data analysis process.
  * event: {"bucket": bucket_name, "type": child_type}
@@ -22,6 +24,44 @@ predict.py
 metrics.py
   * Analyzes the runtimes for each process in our pipeline and calculates the average MSE for our models across all stocks.
   * event: {}
+  
+### Final
+
+parent.py
+  * 
+  * 
+ 
+processing.py
+  * 
+  * 
+  
+parampreds.py
+  * 
+  * 
+  
+predmses.py
+  * 
+  * 
+  
+minmse.py
+  * 
+  * 
+  
+trainfull.py
+  * 
+  * 
+  
+testfull.py
+  * 
+  * 
+  
+timingmetrics.py
+  * 
+  * 
+  
+clearbuckets.py
+  * 
+  * 
 
 ## S3 Bucket File Structure
 
