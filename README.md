@@ -1,5 +1,13 @@
-# DS5110FinalProject
+# UVA MSDS Big Data Systems (DS5110) Spring 2023 Final Project
 Serverless Computing for Big Data Time-Series Forecasting
+
+## Data
+
+The dataset for this project can be found on Kaggle at this [link](https://www.kaggle.com/datasets/debashis74017/stock-market-data-nifty-50-stocks-1-min-data).
+
+It consists of 101 CSV files tracking various price-related metrics and technical indicators on a minute-by-minute level for the Nifty 100 stocks and indices currently traded on the Indian Stock Market.
+
+The total size of this dataset is 66GB.
 
 ## Lambda Functions
 
