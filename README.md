@@ -1,4 +1,4 @@
-# UVA MSDS Big Data Systems (DS5110) Spring 2023 Final Project - Serverless Computing for Big Data Time-Series Forecasting
+# UVA MSDS Big Data Systems (DS5110) Spring 2023 Final Project: Serverless Computing for Big Data Time-Series Forecasting
 
 ## Data
 
