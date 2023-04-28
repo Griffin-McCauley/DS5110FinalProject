@@ -3,6 +3,49 @@ Serverless Computing for Big Data Time-Series Forecasting
 
 ## Lambda Functions
 
+#### Runtime Settings
+Runtime: Python 3.9
+
+Architecture: x86_64
+
+### Final
+
+parent.py
+  * Invokes asynchronous child functions to perform the data processing, hyperparameter optimization, and final model training and testing in a fully parallelized manner.
+  * event: {"type": function_type}
+ 
+processing.py
+  * Cleans and processes the raw data into a form that can be fed into a random forest regression model.
+  * event: {"inbucket": "ds5110s3", "outbucket": f'{file_name.split("_")[0].lower()}-ds5110s3bucket', "file": file_name}
+  
+parampreds.py
+  * Trains a random forest model with a specific set of hyperparameters and stores the predictions generated for the validation set.
+  * event: {"bucket": f'{stock_name.lower()}-ds5110s3bucket', "stock": stock_name, "feat": max_features, "samp": min_features_split, "n_estimators": n_estimators, "pred_num": prediction_number}
+  
+predmses.py
+  * Aggregates the predictions produced by the previously trained set of distributed groves with a shared set of hyperparameters and computes an overall mean squared error (MSE).
+  * event: {"bucket": f'{stock_name.lower()}-ds5110s3bucket', "stock": stock_name}
+  
+minmse.py
+  * Identifies and saves the set of hyperparameters that produced the lowest MSE.
+  * event: {"bucket": f'{stock_name.lower()}-ds5110s3bucket', "stock": stock_name}
+  
+trainfull.py
+  * Using the optimally determined hyperparameters, trains and stores a larger random forest regression model and its validation predictions.
+  * event: {"bucket": f'{stock_name.lower()}-ds5110s3bucket', "stock": stock_name, "n_estimators": n_estimators, "pred_num": prediction_number}
+  
+testfull.py
+  * Combines the predictions of the previously trained set of optimized distributed groves and computes and saves the final MSE value.
+  * event: {"bucket": f'{stock_name.lower()}-ds5110s3bucket', "stock": stock_name}
+  
+timingmetrics.py
+  * Computes the relevant, internally-tracked runtime metrics for each function's invocations, computations, and I/Os.
+  * event: {}
+  
+clearbuckets.py
+  * Utility function for emptying and resetting buckets.
+  * event: {}
+
 ### Checkpoint 2
 
 parent.py
@@ -24,48 +67,67 @@ predict.py
 metrics.py
   * Analyzes the runtimes for each process in our pipeline and calculates the average MSE for our models across all stocks.
   * event: {}
-  
-### Final
-
-parent.py
-  * Invokes asynchronous child functions to perform the data processing, hyperparameter optimization, and final model training and testing in a fully parallelized manner.
-  * event: {"type": function_type}
- 
-processing.py
-  * Cleans and processes our raw data into a form that can be fed into a random forest regression model.
-  * {"inbucket": "ds5110s3", "outbucket": f'{file_name.split("_")[0].lower()}-ds5110s3bucket', "file": file_name}
-  
-parampreds.py
-  * Trains a random forest model with a specific set of hyperparameters and stores the predictions generated for the validation set.
-  * 
-  
-predmses.py
-  * Aggregates the predictions produced by the previously trained set of distributed groves with a shared set of hyperparameters and computes an overall mean squared error (MSE).
-  * 
-  
-minmse.py
-  * Identifies and saves the set of hyperparameters that produced the lowest MSE.
-  * 
-  
-trainfull.py
-  * Using the optimally determined hyperparameters, trains and stores a larger random forest regression model and its validation predictions.
-  * 
-  
-testfull.py
-  * Combines the predictions of the previously trained set of distributed groves and saves a final MSE value.
-  * 
-  
-timingmetrics.py
-  * Computes the relevant, internally tracked runtime metrics for each function and for invocations, computations, and I/O in particular.
-  * event: {}
-  
-clearbuckets.py
-  * Utility function for emptying and resetting buckets.
-  * event: {}
 
 ## S3 Bucket File Structure
 
 ### Final
+
+ * ds5110s3/
+   * raw/
+     * {stock}_minute_data_with_indicators.csv for each stock
+   * runtimes/
+     * invoke_{type}.txt for each Lambda function
+   * timingmetrics/
+     * actualtimingmetrics.csv
+     * fullparalleltimingmetrics.csv
+     * instancecomputetimingmetrics.csv
+     * instanceiotimingmetrics.csv
+     * sequentialtimingmetrics.csv
+
+ * {stock}-ds5110s3bucket/ for each stock
+   * models/
+     * optimized/
+       * best_params.csv
+       * models/
+         * models/
+           * model_{pred_num}.sav for each pred_num
+         * mse.csv
+         * preds/
+           * preds_{pred_num}.csv
+         * runtimes/
+           * compute_{pred_num}.txt
+           * compute.txt
+           * reads3_{pred_num}.txt
+           * reads3.txt
+           * startwrites3_{pred_num}.txt
+           * startwrites3.txt
+       * runtimes/
+         * compute.txt
+         * reads3.txt
+         * startwrites3.txt
+     * params/
+       * feat{feat}_samp{samp}/ for each feat, samp
+         * mse.csv
+         * preds/
+           * preds_{pred_num}.csv
+         * runtimes/
+           * compute_{pred_num}.txt
+           * compute.txt
+           * reads3_{pred_num}.txt
+           * reads3.txt
+           * startwrites3_{pred_num}.txt
+           * startwrites3.txt
+   * processed/
+     * runtimes/
+       * compute.txt
+       * reads3.txt
+       * startwrites3.txt
+     * testing/
+       * {stock}.csv
+     * training/
+       * {stock}.csv
+     * validation/
+       * {stock}.csv
 
 ### Checkpoint 2
 
