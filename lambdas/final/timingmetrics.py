@@ -240,8 +240,8 @@ def lambda_handler(event, context):
     print(f'Max of testfull runtimes: {max(testfull_times)}')
     
     print('.')
-    print(f'Total of parallel computation runtimes: {sum(processing_times)+sum(parampreds_times)+sum(predmses_times)+sum(minmse_times)+sum(trainfull_times)+sum(testfull_times)}')
-    print(f'Total of sequential computation runtimes: {max(processing_times)+max(parampreds_times)+max(predmses_times)+max(minmse_times)+max(trainfull_times)+max(testfull_times)}')
+    print(f'Total of sequential computation runtimes: {sum(processing_times)+sum(parampreds_times)+sum(predmses_times)+sum(minmse_times)+sum(trainfull_times)+sum(testfull_times)}')
+    print(f'Total of parallel computation runtimes: {max(processing_times)+max(parampreds_times)+max(predmses_times)+max(minmse_times)+max(trainfull_times)+max(testfull_times)}')
     
     fullparalleltimingmetrics[6,1] = fullparalleltimingmetrics[0,1] + fullparalleltimingmetrics[1,1] + fullparalleltimingmetrics[2,1] + \
                                      fullparalleltimingmetrics[3,1] + fullparalleltimingmetrics[4,1] + fullparalleltimingmetrics[5,1]
@@ -261,7 +261,7 @@ def lambda_handler(event, context):
     minmse_iotimes = []
     trainfull_iotimes = []
     testfull_iotimes = []
-    for stock in ['LICI', 'YESBANK']:
+    for stock in all_stocks:
         bucket_name = f'{stock.lower()}-ds5110s3bucket'
         
         # processing
@@ -382,8 +382,8 @@ def lambda_handler(event, context):
     print(f'Max of testfull I/O runtimes: {max(testfull_iotimes)}')
     
     print('.')
-    print(f'Total of parallel I/O runtimes: {sum(processing_iotimes)+sum(parampreds_iotimes)+sum(predmses_iotimes)+sum(minmse_iotimes)+sum(trainfull_iotimes)+sum(testfull_iotimes)}')
-    print(f'Total of sequential I/O runtimes: {max(processing_iotimes)+max(parampreds_iotimes)+max(predmses_iotimes)+max(minmse_iotimes)+max(trainfull_iotimes)+max(testfull_iotimes)}')
+    print(f'Total of sequential I/O runtimes: {sum(processing_iotimes)+sum(parampreds_iotimes)+sum(predmses_iotimes)+sum(minmse_iotimes)+sum(trainfull_iotimes)+sum(testfull_iotimes)}')
+    print(f'Total of parallel I/O runtimes: {max(processing_iotimes)+max(parampreds_iotimes)+max(predmses_iotimes)+max(minmse_iotimes)+max(trainfull_iotimes)+max(testfull_iotimes)}')
     
     fullparalleltimingmetrics[6,2] = fullparalleltimingmetrics[0,2] + fullparalleltimingmetrics[1,2] + fullparalleltimingmetrics[2,2] + \
                                      fullparalleltimingmetrics[3,2] + fullparalleltimingmetrics[4,2] + fullparalleltimingmetrics[5,2]
