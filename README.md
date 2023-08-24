@@ -1,5 +1,11 @@
 # UVA MSDS Big Data Systems (DS5110) Spring 2023 Final Project: Serverless Computing for Big Data Time-Series Forecasting
 
+## Deliverables
+
+**A video presentation discussing our methodology and results can be found [here](https://github.com/Griffin-McCauley/DS5110FinalProject/blob/main/Video_Presentation.mp4).**
+
+**Our final report can be found [here](https://github.com/Griffin-McCauley/DS5110FinalProject/blob/main/reports/Final%20Report.pdf).**
+
 ## Data
 
 The dataset for this project can be found on Kaggle at this [link](https://www.kaggle.com/datasets/debashis74017/stock-market-data-nifty-50-stocks-1-min-data).
